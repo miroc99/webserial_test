@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Serial API 示例</title>
+  </head>
+  <body>
+    <h1>Web Serial API 示例</h1>
+    <button id="connect">連接設備</button>
+    <button id="disconnect" disabled>斷開連接</button>
+    <select id="baudrate"></select>
+    <br /><br />
+    <textarea id="input" rows="4" cols="50"></textarea>
+    <br />
+    <button id="send">發送</button>
+    <br /><br />
+    <div id="output"></div>
+
+    <script src="serial.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        initializeBaudrateSelect();
+        document
+          .getElementById("connect")
+          .addEventListener("click", connectToDevice);
+        document
+          .getElementById("disconnect")
+          .addEventListener("click", disconnectFromDevice);
+        document.getElementById("send").addEventListener("click", () => {
+          const data = document.getElementById("input").value;
+          writeToStream(data);
+        });
+      });
+    </script>
+  </body>
+</html>
